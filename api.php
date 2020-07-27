@@ -11,7 +11,7 @@ if(isset($_POST['get_data_produk'])){
 		print_r(json_encode($response));
 		return false;
 	}	
-		$query = $mysqli->query("SELECT id_produk,Nama_produk,Harga_produk,Jumlah_produk from produkk order by id DESC LIMIT 4");
+		$query = $mysqli->query("SELECT id_produk,kd_produk,nama_produk,harga,jumlah_produk,expired from produk order by id DESC LIMIT 4");
 	
 		while($result  = $query->fetch_array(MYSQLI_ASSOC)){
 			$data_arr []= $result;			
@@ -36,9 +36,12 @@ if(isset($_POST['set_data_produk'])){
 		return false;
 	}
 	$id_produk = $mysqli->escape_string($_POST['id_produk']);
-	$Nama_produk = $mysqli->escape_string($_POST['Nama_produk']);
-	$Harga_produk = $mysqli->escape_string($_POST['Harga_produk']);
-	$query = $mysqli->query("INSERT INTO produkk (id_produk,Nama_produk,Harga_produk) VALUES ('$id_produk','$Nama_produk','$Harga_produk')");
+	$nama_produk = $mysqli->escape_string($_POST['kd_produk']);
+	$nama_produk = $mysqli->escape_string($_POST['nama_produk']);
+	$harga = $mysqli->escape_string($_POST['harga']);
+	$nama_produk = $mysqli->escape_string($_POST['jumlah_produk']);
+	$nama_produk = $mysqli->escape_string($_POST['expired']);
+	$query = $mysqli->query("INSERT INTO produk (id_produk,kd_produk,nama_produk,harga,jumlah_produk,expired) VALUES ('$id_produk','$kd_produk','$nama_produk','$harga''$jumlah_produk','$expired')");
 	
 	if($query){
 		$response['error'] = "false";
@@ -59,9 +62,12 @@ if(isset($_POST['edit_data_produk'])){
 		return false;
 	}
 	$id_produk = $mysqli->escape_string($_POST['id_produk']);
-	$Nama_produk = $mysqli->escape_string($_POST['Nama_produk']);
-	$Harga_produk = $mysqli->escape_string($_POST['Harga_produk']);
-	$query = $mysqli->query("UPDATE INTO produkk (id_produk,Nama_produk,Harga_produk) VALUES ('$id_produk','$Nama_produk','$Harga_produk')");
+	$nama_produk = $mysqli->escape_string($_POST['kd_produk']);
+	$nama_produk = $mysqli->escape_string($_POST['nama_produk']);
+	$harga = $mysqli->escape_string($_POST['harga']);
+	$nama_produk = $mysqli->escape_string($_POST['jumlah_produk']);
+	$nama_produk = $mysqli->escape_string($_POST['expired']);
+	$query = $mysqli->query("UPDATE INTO produk (id_produk,kd_produk,nama_produk,harga,jumlah_produk,expired) VALUES ('$id_produk','$kd_produk','$nama_produk','$harga''$jumlah_produk','$expired')");
 	
 	if($query){
 		$response['error'] = "false";
@@ -81,7 +87,7 @@ if(isset($_POST['delete_data_produk'])){
 		print_r(json_encode($response));
 		return false;
 	}
-	$query = $mysqli->query("DELETE INTO produkk (id_produk,Nama_produk,Harga_produk) VALUES ('$id_produk','$Nama_produk','$Harga_produk')");
+	$query = $mysqli->query("DELETE INTO produk (id_produk,kd_produk,nama_produk,harga,jumlah_produk,expired) VALUES ('$id_produk','$kd_produk','$nama_produk','$harga''$jumlah_produk','$expired')");
 	if($query){
 		$response['error'] = "false";
 		$response['message'] = "data berhasil dihapus";
